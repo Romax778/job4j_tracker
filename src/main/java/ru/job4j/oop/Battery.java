@@ -14,6 +14,7 @@ public class Battery {
 
 
 
+
     }
     public static void main(String[]args){
         Battery first = new Battery(5);
