@@ -1,6 +1,4 @@
-package ru.job4j.tracker;
-
-import java.util.Objects;
+package ru.job4j.trackerTest;
 
 public class Item {
     private String id;
