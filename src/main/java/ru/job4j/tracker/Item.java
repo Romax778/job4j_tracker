@@ -1,4 +1,4 @@
-package ru.job4j.trackerTest;
+package ru.job4j.tracker;
 
 public class Item {
     private String id;
@@ -22,5 +22,8 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
+    }
+    public String toString(){
+        return id + " " + name;
     }
 }
