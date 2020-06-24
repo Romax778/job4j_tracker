@@ -12,19 +12,18 @@ public class MagicBall {
 
 
         int answer = new Random().nextInt(3);
-        for (int i = 0; i < 3; i++) {
-            if (answer == 0) {
-                System.out.println("Yes");
-break;
-            }
+
             if (answer == 1) {
+                System.out.println("Yes");
+
+            }
+             else if (answer == 2) {
                 System.out.println("No");
-                break;
-            } else {
+
+            } else if(answer == 3){
                 System.out.println("May be");
-                break;
+
             }
         }
 
     }
-}
