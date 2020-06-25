@@ -21,7 +21,7 @@ public class MagicBall {
                 System.out.println("No");
 
             } else if(answer == 3){
-                System.out.println("May");
+                System.out.println("May be");
 
             }
         }
