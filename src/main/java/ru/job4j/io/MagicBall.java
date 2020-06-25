@@ -20,7 +20,7 @@ public class MagicBall {
              else if (answer == 2) {
                 System.out.println("No");
 
-            } else if(answer == 3){
+            } else {
                 System.out.println("May be");
 
             }
