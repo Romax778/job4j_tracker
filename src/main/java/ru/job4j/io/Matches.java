@@ -28,7 +28,7 @@ public class Matches {
 
                 break;
             }
-            else if(chois1 ==0 & igrok_2){
+            else if(matches ==0 & igrok_2){
                 System.out.println("Game over! Igrok_2 pobedil2");
 
                 break;
