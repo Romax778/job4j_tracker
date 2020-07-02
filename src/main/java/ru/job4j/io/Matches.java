@@ -18,8 +18,11 @@ public class Matches {
             System.out.print("Player " + playerNumber + " take matches from 1 to 3 : ");
             do {
                 userChoice = input.nextInt();
-                if (userChoice < 1 || userChoice > 3 || userChoice>matches) System.out.println("Wrong amount of matches, try again!!!");
-                else break;
+                if (userChoice < 1 || userChoice > 3 || userChoice > matches) {
+                    System.out.println("Wrong amount of matches, try again!!!");
+                } else {
+                    break;
+                }
             } while (true);
 
             matches -= userChoice;
@@ -31,7 +34,7 @@ public class Matches {
                 System.out.println(matches + " matches left");
             }
 
-            playerNumber = playerNumber==1?2:1;
+            playerNumber = playerNumber == 1 ? 2 : 1;
 
         } while (repeatGame);
     }
