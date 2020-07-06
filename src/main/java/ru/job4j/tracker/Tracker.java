@@ -1,49 +1,61 @@
 package ru.job4j.tracker;
 
-import java.util.Random;
+import java.util.Arrays;
+
 
 public class Tracker {
     private final Item[] items = new Item[100];
-   private int position = 0;
+    private int ids = 1;
+    private int position = 0;
 
     public Item add(Item item) {
-        item.setId(generateId());
+        item.setId(ids++);
         items[position++] = item;
         return item;
     }
-    private String generateId() {
-        Random rm = new Random();
-        return String.valueOf(rm.nextLong() + System.currentTimeMillis());
-    }
-    public Item[] findAll(){
-  Item [] it  = new Item[position];
-        System.arraycopy(items,0,it,0,position);
-        return it;
-    }
-    public Item[] findByName(String key){
-        Item[]resArr = new Item[position + 1];
-        int temp = -1;
-        for(int i = 0; i < position;i++){
-            if(items[i].getName().equals(key)){
-                resArr[++temp]= items[i];
 
+
+
+    public Item[] findAll() {
+        Item[] result = new Item[position];
+        int actualSize=0;
+
+        for(int i = 0;i<items.length;i++){
+            Item current = items[i];
+            if(current != null) {
+                result[actualSize++]= current;
             }
 
+        }
+
+        return Arrays.copyOf(result,actualSize);
+    }
+
+    public Item[] findByName(String key) {
+        Item[] resArr = new Item[position];
+        int actualSize = 0;
+
+        for (int i = 0; i < position; i++) {
+            if (items[i].getName().equals(key)) {
+                resArr[actualSize++] = items[i];
+            }
 
         }
-        Item [] it2 = new Item[temp + 1];
-        System.arraycopy(resArr,0,it2,0,it2.length);
-        return it2;
+
+        return Arrays.copyOf(resArr,actualSize);
     }
-    public Item findById(String id) {
-        Item rsl = null;
+
+    public Item findById(int id) {
+        Item result = null;
+
         for (int index = 0; index < position; index++) {
-            Item item = items[index];
-            if (item.getId().equals(id)) {
-                rsl = item;
+            Item current = items[index];
+
+            if (current!=null && current.getId()==id) {
+                result = current;
                 break;
             }
         }
-        return rsl;
+        return result;
     }
 }
