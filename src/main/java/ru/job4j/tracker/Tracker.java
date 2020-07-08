@@ -51,7 +51,7 @@ public class Tracker {
         for (int index = 0; index < position; index++) {
             Item current = items[index];
 
-            if (current!=null && current.getId()==id) {
+            if (current.getId()==id) {
                 result = current;
                 break;
             }
