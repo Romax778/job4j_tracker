@@ -4,6 +4,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 public class TrackerTest {
     private Tracker tracker;
 
@@ -56,7 +59,20 @@ public class TrackerTest {
 
 
     }
+    @Test
+    public void whenReplace() {
+        Tracker tracker = new Tracker();
+        Item bug = new Item();
+        bug.setName("Bug");
+        tracker.add(bug);
 
+        int id = bug.getId();
+        Item bugWithDesc = new Item();
+        bugWithDesc.setName("Bug with description");
+
+        tracker.replace(id, bugWithDesc);
+        assertThat(tracker.findById(id).getName(), is("Bug with description"));
+    }
     @Test
     public void findById() {
         int id = 2;
@@ -65,4 +81,15 @@ public class TrackerTest {
 
         Assertions.assertThat(requestedItem.getId()).isEqualTo(id);
     }
+
+  /*  @Test
+    public void whenDelete() {
+        Tracker tracker = new Tracker();
+        Item bug = new Item();
+        bug.setName("Bug");
+        tracker.add(bug);
+        int id = bug.getId();
+        tracker.delete(id);
+        assertThat(tracker.findById(id), is(nullValue()));
+    }*/
 }
