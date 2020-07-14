@@ -82,7 +82,7 @@ public class TrackerTest {
         Assertions.assertThat(requestedItem.getId()).isEqualTo(id);
     }
 
-  /*  @Test
+   /* @Test
     public void whenDelete() {
         Tracker tracker = new Tracker();
         Item bug = new Item();

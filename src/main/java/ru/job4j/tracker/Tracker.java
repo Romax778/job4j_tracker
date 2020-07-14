@@ -9,17 +9,20 @@ public class Tracker {
     private int position = 0;
 
     public Item add(Item item) {
-       // item.setId(ids++);
+        if(position >=100) return null;
+        item.setId(ids++);
         items[position++] = item;
         return item;
     }
 
     public boolean replace(int id, Item item) {
+        /*if (item == null){ return false}; */
+
         int index = indexOf(id);
-       if (index != -1)  {
-           item.setId(items[index].getId());
-           items[index]= item ;
-       }
+        if (index != -1) {
+            item.setId(id);
+            items[index] = item;
+        }
         return index != -1;
     }
 
@@ -38,7 +41,7 @@ public class Tracker {
 
         }
 
-        return Arrays.copyOf(resArr,actualSize);
+        return Arrays.copyOf(resArr, actualSize);
     }
 
     private int indexOf(int id) {
@@ -52,22 +55,22 @@ public class Tracker {
         return rsl;
     }
 
-  /*  public boolean delete(int id) {
+   /* public boolean delete(int id) {
         int index = indexOf(id);
-        if (index != -1)  {
+        if (index != -1) {
             items[index] = null;
-            System.arraycopy(items, index+1, items, index, position-index);
+            System.arraycopy(items, index + 1, items, index, position - index);
             position--;
         }
 
         return index != -1;
-    } */
+    }*/
 
 
-   public Item findById(int id) {
+    public Item findById(int id) {
 
-       int index = indexOf(id);
+        int index = indexOf(id);
 
-       return index != -1 ? items[index] : null;
-   }
+        return index != -1 ? items[index] : null;
+    }
 }
