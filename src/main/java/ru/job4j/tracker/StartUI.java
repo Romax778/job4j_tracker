@@ -1,20 +1,21 @@
 package ru.job4j.tracker;
 
-import java.util.Scanner;
+
 
 public class StartUI {
 
-    public void init(Scanner scanner, Tracker tracker) {
+    public void init(Input input, Tracker tracker) {
+        String msg = "Enter id";
         boolean run = true;
         while (run) {
             this.showMenu();
 
             System.out.print("\nSelect: ");
-            int select = Integer.valueOf(scanner.nextLine());
+            int select = Integer.valueOf(input.askStr(msg));
             System.out.println("======================================");
             if (select == 0) {
                 System.out.print("Enter name: ");
-                String name = scanner.nextLine();
+                String name = input.askStr(msg);
                 Item item = new Item(name);
                 tracker.add(item);
             } else if (select == 1) {
@@ -24,14 +25,14 @@ public class StartUI {
                 }
             } else if (select == 2) {
                 System.out.print("Enter task name: ");
-                String taskName = scanner.nextLine();
+                String taskName = input.askStr(msg);
                 Item[] items = tracker.findByName(taskName);
 
                 if (items.length != 1) {
                     System.out.println("Task with name :" + taskName + " not found");
                 } else {
                     System.out.print("Enter new task name: ");
-                    String newTaskName = scanner.nextLine();
+                    String newTaskName = input.askStr(msg);
                     if (tracker.replace(items[0].getId(), new Item(newTaskName))) {
                         System.out.println("Task " + items[0].toString() + " was edited!!!");
                     } else {
@@ -41,7 +42,7 @@ public class StartUI {
                 }
             } else if (select == 3) {
                 System.out.print("Enter task name: ");
-                String taskName = scanner.nextLine();
+                String taskName = input.askStr(msg);
                 Item[] items = tracker.findByName(taskName);
 
                 if (items.length != 1) {
@@ -56,7 +57,7 @@ public class StartUI {
                 }
             } else if (select == 4) {
                 System.out.print("Enter task id: ");
-                int taskId = Integer.valueOf(scanner.nextLine());
+                int taskId = Integer.valueOf(input.askStr(msg));
                 Item item = tracker.findById(taskId);
                 if (item != null) {
                     System.out.println("Task found :");
@@ -66,7 +67,7 @@ public class StartUI {
                 }
             } else if (select == 5) {
                 System.out.print("Enter task name: ");
-                String taskName = scanner.nextLine();
+                String taskName = input.askStr(msg);
                 Item[] items = tracker.findByName(taskName);
 
                 if (items.length != 1) {
@@ -95,9 +96,19 @@ public class StartUI {
 
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Input input = new ConsoleInput() {
+            @Override
+            public String askStr(String question) {
+                return null;
+            }
+
+            @Override
+            public int askInt(String question) {
+                return 0;
+            }
+        };
         Tracker tracker = new Tracker();
-        new StartUI().init(scanner, tracker);
+        new StartUI().init(input, tracker);
 
     }
 }
