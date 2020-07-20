@@ -3,19 +3,37 @@ package ru.job4j.tracker;
 
 
 public class StartUI {
+   /* public static void createItem(Input input, Tracker tracker) {
+        System.out.println("=== Create a new Item ====");
+        String name = input.askStr("Enter name: ");
+        Item item = new Item(name);
+        tracker.add(item);
+    }
 
+    public static void replaceItem(Input input, Tracker tracker) {
+        System.out.println("=== Replace an Item ====");
+        String name = input.askStr("choose id: ");
+        Item item = new Item(name);
+        tracker.replace(,item);
+    }
+    public static void deleteItem(Input input, Tracker tracker) {
+        System.out.println("=== Create a new Item ====");
+        String name = input.askStr("Enter name: ");
+        Item item = new Item(name);
+        tracker.delete(item);
+    }*/
     public void init(Input input, Tracker tracker) {
-        String msg = "Enter id";
+
         boolean run = true;
         while (run) {
             this.showMenu();
 
             System.out.print("\nSelect: ");
-            int select = Integer.valueOf(input.askStr(msg));
+            int select = Integer.valueOf(input.askStr("Select"));
             System.out.println("======================================");
             if (select == 0) {
-                System.out.print("Enter name: ");
-                String name = input.askStr(msg);
+                System.out.print("Create new item");
+                String name = input.askStr("Enter name");
                 Item item = new Item(name);
                 tracker.add(item);
             } else if (select == 1) {
@@ -24,15 +42,15 @@ public class StartUI {
                     System.out.println(items[i].toString());
                 }
             } else if (select == 2) {
-                System.out.print("Enter task name: ");
-                String taskName = input.askStr(msg);
+
+                String taskName = input.askStr("Enter task name: ");
                 Item[] items = tracker.findByName(taskName);
 
                 if (items.length != 1) {
                     System.out.println("Task with name :" + taskName + " not found");
                 } else {
-                    System.out.print("Enter new task name: ");
-                    String newTaskName = input.askStr(msg);
+
+                    String newTaskName = input.askStr("Enter new task name: ");
                     if (tracker.replace(items[0].getId(), new Item(newTaskName))) {
                         System.out.println("Task " + items[0].toString() + " was edited!!!");
                     } else {
@@ -41,8 +59,8 @@ public class StartUI {
 
                 }
             } else if (select == 3) {
-                System.out.print("Enter task name: ");
-                String taskName = input.askStr(msg);
+
+                String taskName = input.askStr("Enter task name: ");
                 Item[] items = tracker.findByName(taskName);
 
                 if (items.length != 1) {
@@ -56,8 +74,8 @@ public class StartUI {
 
                 }
             } else if (select == 4) {
-                System.out.print("Enter task id: ");
-                int taskId = Integer.valueOf(input.askStr(msg));
+
+                int taskId = Integer.valueOf(input.askStr("Enter task id: "));
                 Item item = tracker.findById(taskId);
                 if (item != null) {
                     System.out.println("Task found :");
@@ -66,8 +84,8 @@ public class StartUI {
                     System.out.println("Task with id: " + taskId + " not  found!!!");
                 }
             } else if (select == 5) {
-                System.out.print("Enter task name: ");
-                String taskName = input.askStr(msg);
+
+                String taskName = input.askStr("Enter task name: ");
                 Item[] items = tracker.findByName(taskName);
 
                 if (items.length != 1) {
@@ -108,7 +126,8 @@ public class StartUI {
             }
         };
         Tracker tracker = new Tracker();
-        new StartUI().init(input, tracker);
-
+         /*StartUI.createItem(input,tracker);
+         StartUI.replaceItem();
+*/
     }
 }
