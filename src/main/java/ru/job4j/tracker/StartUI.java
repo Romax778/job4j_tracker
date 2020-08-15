@@ -1,8 +1,6 @@
 package ru.job4j.tracker;
 
 
-import java.util.Scanner;
-
 public class StartUI {
 
     public static void createItem(Input input, Tracker tracker) {
@@ -11,122 +9,107 @@ public class StartUI {
         Item item = new Item(name);
         tracker.add(item);
     }
-    public void init(Scanner scanner, Tracker tracker) {
 
-        boolean run = true;
+    public static void showAllItems(Tracker tracker) {
+        Item[] items = tracker.findAll();
 
-        while (run) {
+        for (int i = 0; i < items.length; i++)
+            System.out.println(items[i]);
+    }
 
-            this.showMenu();
-
-
-            System.out.println("Select: ");
-
-            int select = Integer.parseInt(scanner.nextLine());
-
-            System.out.println("======================================");
-
-            if (select == 0) {
-
-                System.out.println("Enter name: ");
-
-                String name = scanner.nextLine();
-
-                Item item = new Item(name);
-
-                tracker.add(item);
-
-            } else if (select == 1) {
-
-                Item[] items = tracker.findAll();
-
-                for (int i = 0; i < items.length; i++) {
-
-                    System.out.println(items[i]);
-
-                }
-
-            } else if (select == 2) {
-
-                System.out.print("Enter task id: ");
-
-                int taskId = Integer.parseInt(scanner.nextLine());
-
-                System.out.print("Enter new task name: ");
-                String taskName = scanner.nextLine();
-
-                Item some = new Item(taskName);
-
-                if (tracker.replace(taskId, some)) {
-                    System.out.println("Task was edited!!");
-                } else {
-                    System.out.println("Task with id " + taskId + " not found!!");
-                }
-
-            } else if (select == 3) {
-
-                System.out.print("Enter task id: ");
-
-                int taskId = scanner.nextInt();
-
-                if (tracker.delete(taskId)) {
-                    System.out.println("Task was deleted!!");
-                } else {
-                    System.out.println("Task with id " + taskId + " not found!!");
-                }
+    public static void replaceItem(Input input, Tracker tracker) {
 
 
-            } else if (select == 4) {
+        int taskId = input.askInt("Enter task id: ");
+        String taskName = input.askStr("Enter new task name: ");
 
-                System.out.print("Enter task id: ");
+        Item some = new Item(taskName);
 
-                int taskId = Integer.parseInt(scanner.nextLine());
+        if (tracker.replace(taskId, some)) {
+            System.out.println("Task was edited!!");
+        } else {
+            System.out.println("Task with id " + taskId + " not found!!");
+        }
+    }
 
-                Item item = tracker.findById(taskId);
-
-                if (item != null) {
-
-                    System.out.println("Task found :");
-
-                    System.out.println(item);
-
-                } else {
-
-                    System.out.println("Task with id: " + taskId + " not  found!!!");
-
-                }
-
-            } else if (select == 5) {
-
-                System.out.print("Enter task name: ");
-
-                String taskName = scanner.nextLine();
-
-                Item[] items = tracker.findByName(taskName);
+    public static void deleteItem(Input input, Tracker tracker) {
 
 
-                if (items.length == 0) {
+        int taskId = input.askInt("Enter task id: ");
 
-                    System.out.println("Task with name :" + taskName + " not found");
+        if (tracker.delete(taskId)) {
+            System.out.println("Task was deleted!!");
+        } else {
+            System.out.println("Task with id " + taskId + " not found!!");
+        }
 
-                } else {
+    }
 
-                    for (int i = 0; i < items.length; i++) {
+    public static void findItemById(Input input, Tracker tracker) {
 
-                        System.out.println(items[i]);
+        int taskId = input.askInt("Enter task id: ");
+        Item item = tracker.findById(taskId);
 
-                    }
+        if (item != null) {
+            System.out.println("Task found :");
+            System.out.println(item);
+        } else {
+            System.out.println("Task with id: " + taskId + " not  found!!!");
+        }
+    }
 
-                }
+    public static void findItemsByName(Input input, Tracker tracker) {
 
-            } else if (select == 6) {
+        System.out.print("Enter task name: ");
 
-                run = false;
+        String taskName = input.askStr("Enter name: ");
+
+        Item[] items = tracker.findByName(taskName);
+
+
+        if (items.length == 0) {
+
+            System.out.println("Task with name :" + taskName + " not found");
+
+        } else {
+
+            for (int i = 0; i < items.length; i++) {
+
+                System.out.println(items[i]);
 
             }
 
         }
 
+    }
+
+
+    public void init(Input input, Tracker tracker) {
+
+        boolean run = true;
+
+        while (run) {
+            this.showMenu();
+            int select = input.askInt("select");
+
+            System.out.println("======================================");
+
+            if (select == 0) {
+                StartUI.createItem(input, tracker);
+            } else if (select == 1) {
+                StartUI.showAllItems(tracker);
+            } else if (select == 2) {
+                StartUI.replaceItem(input, tracker);
+            } else if (select == 3) {
+                StartUI.deleteItem(input, tracker);
+            } else if (select == 4) {
+                StartUI.findItemById(input, tracker);
+            } else if (select == 5) {
+                StartUI.findItemsByName(input, tracker);
+            } else if (select == 6) {
+                run = false;
+            }
+        }
     }
 
 
@@ -154,11 +137,11 @@ public class StartUI {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        Input input = new ConsoleInput();
 
         Tracker tracker = new Tracker();
 
-        new StartUI().init(scanner, tracker);
+        new StartUI().init(input , tracker);
 
 
     }
