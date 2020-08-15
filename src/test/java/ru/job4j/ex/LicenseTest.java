@@ -1,9 +1,11 @@
-package ru.job4j.pojo;
+package ru.job4j.ex;
+
 
 import org.junit.Assert;
 import org.junit.Test;
+import ru.job4j.pojo.License;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.CoreMatchers.is;
 
 public class LicenseTest {
 
