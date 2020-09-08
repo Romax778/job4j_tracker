@@ -2,21 +2,29 @@ package ru.job4j.tracker.actions;
 
 import ru.job4j.tracker.Tracker;
 import ru.job4j.tracker.console.Input;
+import ru.job4j.tracker.console.Output;
 
 public class DeleteItemAction implements UserAction {
+    private final Output out;
+    public DeleteItemAction(Output out) {
+        this.out = out;
+    }
+
+
     @Override
     public String name() {
-        return "=== DELETE ITEM ====";
+        return "Delete";
     }
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
+        out.println("=== DELETE ITEM ====");
         int taskId = input.askInt("Enter task id: ");
 
         if (tracker.delete(taskId)) {
-            System.out.println("Task was deleted!!");
+            out.println("Task was deleted!!");
         } else {
-            System.out.println("Task with id " + taskId + " not found!!");
+           out.println("Task with id " + taskId + " not found!!");
         }
         return true;
     }

@@ -3,24 +3,31 @@ package ru.job4j.tracker.actions;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 import ru.job4j.tracker.console.Input;
+import ru.job4j.tracker.console.Output;
 
 public class FindItemByIdAction implements UserAction {
+    public FindItemByIdAction(Output out) {
+        this.out = out;
+    }
+
+    private final Output out;
+
     @Override
     public String name() {
-        return "=== FIND ITEM BY ID ====";
+        return " Find by id ";
     }
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
-
+        out.println("---FIND ITEM BY ID---");
         int taskId = input.askInt("Enter task id: ");
         Item item = tracker.findById(taskId);
 
         if (item != null) {
-            System.out.println("Task found :");
-            System.out.println(item);
+            out.println("Task found :");
+            out.println(item);
         } else {
-            System.out.println("Task with id: " + taskId + " not  found!!!");
+            out.println("Task with id: " + taskId + " not  found!!!");
         }
         return true;
     }
