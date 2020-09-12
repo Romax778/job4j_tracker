@@ -14,12 +14,12 @@ public class FindItemByIdAction implements UserAction {
 
     @Override
     public String name() {
-        return " Find by id ";
+        return  "FIND BY ID";
     }
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
-        out.println("---FIND ITEM BY ID---");
+
         int taskId = input.askInt("Enter task id: ");
         Item item = tracker.findById(taskId);
 

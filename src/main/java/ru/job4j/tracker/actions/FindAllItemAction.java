@@ -5,22 +5,29 @@ import ru.job4j.tracker.Tracker;
 import ru.job4j.tracker.console.Input;
 import ru.job4j.tracker.console.Output;
 
-public class ShowItemsAction implements UserAction {
+public class FindAllItemAction implements UserAction {
     private final Output out;
 
-    public ShowItemsAction(Output out) {
+    public FindAllItemAction(Output out) {
         this.out = out;
     }
 
+
     @Override
     public String name() {
-        return "ITEMS";
+        return "FIND ALL";
     }
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
         Item[] items = tracker.findAll();
-        for (Item item : items) out.println(item);
+
+
+        for (int i = 0; i < items.length; i++) {
+            out.println(items[i]);
+        }
+
         return true;
     }
 }
+
