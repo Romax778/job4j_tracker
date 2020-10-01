@@ -2,7 +2,6 @@ package ru.job4j.tracker;
 
 
 import ru.job4j.tracker.actions.*;
-import ru.job4j.tracker.console.ConsoleInput;
 import ru.job4j.tracker.console.ConsoleOutput;
 import ru.job4j.tracker.console.Input;
 import ru.job4j.tracker.console.Output;
@@ -22,8 +21,15 @@ public class StartUI {
             this.showMenu(actions);
 
             int select = input.askInt("Select: ");
-            UserAction action = actions[select];
 
+
+            UserAction action = null;
+            try {
+                action = actions[select];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Choose existing option");
+                continue;
+            }
             run = action.execute(input, tracker);
         }
     }
@@ -40,14 +46,14 @@ public class StartUI {
     public static void main(String[] args) {
         Output output = new ConsoleOutput();
 
-        Input input = new ConsoleInput();
+        Input input = new ru.job4j.tracker.ValidateInput();
 
         Tracker tracker = new Tracker();
 
         UserAction[] actions = {
                 new CreateAction(output), new ShowItemsAction(output), new ReplaceItemAction(output),
                 new DeleteItemAction(output), new FindItemByIdAction(output), new FindItemsByNameAction(output),
-                new FindAllItemAction(output)
+                new FindAllItemAction(output),new ExitAction(output)
         };
         new StartUI(output).init(input, tracker, actions);
 
