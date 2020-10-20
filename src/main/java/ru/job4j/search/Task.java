@@ -17,11 +17,5 @@ public class Task {
         return priority;
     }
 
-    @Override
-    public String toString() {
-        return "Task{" +
-                "desc='" + desc + '\'' +
-                ", priority=" + priority +
-                '}';
+
     }
-}
