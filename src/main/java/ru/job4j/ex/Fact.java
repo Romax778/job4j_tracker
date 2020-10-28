@@ -17,6 +17,7 @@ public class Fact {
     }
 
     public static void main(String[] args) {
-        System.out.println("Factorial of 10 is : " + calc(-10));
+        int number = -10;
+        System.out.println("Factorial of 10 is : " + calc(number));
     }
 }
