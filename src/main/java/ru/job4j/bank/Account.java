@@ -15,7 +15,7 @@ public class Account {
         return requisite;
     }
 
-    public void setRequisite(String requisite) {
+    public void setRequisite(String requisit) {
         this.requisite = requisite;
     }
 
