@@ -6,6 +6,9 @@ import ru.job4j.tracker.console.ConsoleOutput;
 import ru.job4j.tracker.console.Input;
 import ru.job4j.tracker.console.Output;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StartUI {
     private final Output out;
 
@@ -14,7 +17,7 @@ public class StartUI {
     }
 
 
-    public void init(Input input, Tracker tracker, UserAction[] actions) {
+    public void init(Input input, Tracker tracker, List<UserAction> actions) {
         boolean run = true;
 
         while (run) {
@@ -24,11 +27,11 @@ public class StartUI {
 
 
             UserAction action = null;
-            if(select < 0 || select >= actions.length) {
+            if(select < 0 || select >= actions.size()) {
                 System.out.println("Choose existing option");
                 continue;
             }
-                action = actions[select];
+                action = actions.get(select);
 
 
 
@@ -37,10 +40,10 @@ public class StartUI {
     }
 
 
-    private void showMenu(UserAction[] actions) {
+    private void showMenu(List<UserAction> actions) {
         out.println("Menu.");
-        for (int index = 0; index < actions.length; index++) {
-            out.println(index + ". " + actions[index].name());
+        for (int index = 0; index < actions.size(); index++) {
+            out.println(index + ". " + actions.get(index).name());
         }
     }
 
@@ -52,11 +55,16 @@ public class StartUI {
 
         Tracker tracker = new Tracker();
 
-        UserAction[] actions = {
-                new CreateAction(output), new ShowItemsAction(output), new ReplaceItemAction(output),
-                new DeleteItemAction(output), new FindItemByIdAction(output), new FindItemsByNameAction(output),
-                new FindAllItemAction(output),new ExitAction(output)
-        };
+        List<UserAction>actions = new ArrayList<>() ;
+                actions.add(new CreateAction(output));
+                actions.add(new ShowItemsAction(output));
+                actions.add(new ReplaceItemAction(output));
+        actions.add(new DeleteItemAction(output));
+        actions.add( new FindItemByIdAction(output));
+        actions.add( new FindItemsByNameAction(output));
+        actions.add( new FindAllItemAction(output));
+        actions.add(new ExitAction(output));
+
         new StartUI(output).init(input, tracker, actions);
 
     }
