@@ -27,7 +27,7 @@ public class StartUI {
 
 
             UserAction action = null;
-            if(select < 0 || select >= action.size()) {
+            if(select < 0 || select >= actions.size()) {
                 System.out.println("Choose existing option");
                 continue;
             }
