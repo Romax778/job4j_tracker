@@ -56,7 +56,7 @@ public class Tracker {
             items.remove(id);
         }
 
-        return index != -1;
+        return index != -1
     }
 
 
